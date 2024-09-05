@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url('../image/Cover.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgb(65, 118, 131);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 3);
+}
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+.Container button {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: rgb(65, 118, 131);
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.Container button:hover {
+    background-color: rgb(50, 90, 100);
+}

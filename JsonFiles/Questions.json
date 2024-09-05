@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "answers": ["Berlin", "London", "Madrid", "Paris"],
+      "correctAnswer": "Paris"
+    },
+    {
+      "question": "Which language is used for web development?",
+      "answers": ["Python", "HTML", "Java", "C++"],
+      "correctAnswer": "HTML"
+    },
+    {
+      "question": "What does CSS stand for?",
+      "answers": ["Cascading Style Sheets", "Creative Style Sheets", "Computer Style Sheets", "Colorful Style Sheets"],
+      "correctAnswer": "Cascading Style Sheets"
+    },
+    {
+      "question": "Which HTML tag is used to define an unordered list?",
+      "answers": ["ul", "ol", "li", "list"],
+      "correctAnswer": "ul"
+    },
+    {
+      "question": "What is the largest planet in our solar system?",
+      "answers": ["Earth", "Mars", "Jupiter", "Saturn"],
+      "correctAnswer": "Jupiter"
+    },
+    {
+      "question": "Which company developed the Java programming language?",
+      "answers": ["Google", "Microsoft", "Apple", "Sun Microsystems"],
+      "correctAnswer": "Sun Microsystems"
+    },
+    {
+      "question": "Which HTML attribute is used to define inline styles?",
+      "answers": ["style", "class", "id", "styles"],
+      "correctAnswer": "style"
+    },
+    {
+      "question": "What year was JavaScript created?",
+      "answers": ["1995", "1998", "2000", "2005"],
+      "correctAnswer": "1995"
+    },
+    {
+      "question": "Which tag is used to create a hyperlink in HTML?",
+      "answers": ["a", "link", "href", "hyperlink"],
+      "correctAnswer": "a"
+    },
+    {
+      "question": "Which of the following is a JavaScript framework?",
+      "answers": ["React", "Laravel", "Django", "Flask"],
+      "correctAnswer": "React"
+    }
+  ]
+}

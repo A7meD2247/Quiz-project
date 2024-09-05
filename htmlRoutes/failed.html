@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/failed.css" />
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+</head>
+<body>
+    <div id="animationContainer">
+        <div id="successAnimation">
+            <div class="score"><p>Score:</p></div>
+            <div class="score" id="Score"></div>
+        </div>
+
+        <div id="failureAnimation">
+            <dotlottie-player src="https://lottie.host/e1183fee-b363-4c32-b688-69df04b28e94/7OtFnu2CYX.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+            <p class="Failed">You failed the exam. Try again Later!</p>
+        </div>
+    </div>
+    <script src="../script/ExamClass.js"></script>
+</body>
+</html>

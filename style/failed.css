@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url('../image/Cover.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgb(65, 118, 131);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#animationContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.congratulation {
+    font-size: 2em;
+    color: #c6d6c6;
+    animation: fadeIn 2s ease-in-out, scaleUp 1s ease-out;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.score {
+    color: skyblue;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.Failed {
+    font-weight: bold;
+    color:rgb(200, 233, 233);
+    font-size: large;
+}
+
+#animationContainer {
+    text-align: center;
+}

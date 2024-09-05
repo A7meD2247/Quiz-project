@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/Exam.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="question-area" id="question-area">
+            <div class="big-square"></div>
+            <div class="small-square"></div>
+            <div class="small-square"></div>
+            <div class="small-square"></div>
+            <div class="small-square"></div>
+            <div class="question-indicator" id="questionIndicator"></div>
+            <div class="button-area">
+                <button class="prev-button" id="Prev">Prev</button>
+                <button class="hidden" id="submitExam">Supmit</button>
+                <button class="next-button" id="Next">Next</button>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="time"><p id="Time"></p></div>
+            <div class="flag" id="Flag"></div>
+            <div class="score">
+            <div class="flagged-questions" id="flaggedQuestions"></div>
+            </div>
+        </div>
+        <div id="overlay" class="hidden"></div>
+        <div class="left-top" id="Info">
+            <img src="../image/Info.png" alt="Info">
+            <div id="message">
+                <p>Hello,</p>
+                <p>Welcome to the exam page!</p>
+                <p>You have 10 questions to complete within 5 minutes.</p>
+                <p>If you encounter a problem with any question, click the flag icon. After selecting your answer, click 'Next' to move to the next question. You can review and change your answers before submitting.</p>
+            </div>
+        </div>
+        <div id="popup" class="popup hidden">
+            <div class="popup-content">
+                <p>Please answer all questions before submitting.</p>
+                <button id="closePopup">OK</button>
+            </div>
+        </div>
+        <div id="confirmationPopup" class="popup hidden">
+            <div class="popup-content">
+                <p>Are you sure you want to submit your answers?</p>
+                <button id="confirmYes">Yes</button>
+                <button id="confirmNo">No</button>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+        <script src="../script/ExamClass.js"></script>
+    </div>
+    <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; text-align:center; color:white; font-size:24px; line-height:100vh;">
+        Please wait...
+    </div>
+</body>
+</html>

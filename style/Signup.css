@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     min-height: 100vh;
-    background: url('background.jpg') no-repeat;
+    background: url('../image/background.jpg') no-repeat;
     background-size: cover;
     background-position: center;
     align-items: center;
