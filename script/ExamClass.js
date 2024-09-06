@@ -46,31 +46,6 @@ class Exam {
         this.updateFlaggedQuestionsList();
     }
 
-    displayFlaggedQuestions() {
-        // Get the DOM element where flagged questions will be displayed
-        const flaggedQuestionsContainer = document.getElementById('flaggedQuestions');
-        // Check if the container exists
-        if (flaggedQuestionsContainer) {
-            // Create an unordered list for better structure of flagged questions
-            const ul = document.createElement('ul');
-            // Iterate over each flagged question index
-            this.flaggedQuestions.forEach((questionIndex) => {
-                // Create a list item for each flagged question
-                const listItem = document.createElement('li');
-                // Add a click event listener to navigate to the flagged question when clicked
-                listItem.textContent = `Question ${questionIndex + 1}`;
-                
-                listItem.addEventListener('click', () => {
-                    // Call the method to navigate
-                    this.navigateToQuestion(questionIndex);
-                });
-            });
-        } else {
-            // Log an error if the flagged questions container is not found
-            console.error('Flagged questions container not found');
-        }
-    }
-
     updateFlaggedQuestionsList() {
         // Get the DOM element for flagged questions
         const flaggedQuestionsContainer = document.getElementById('flaggedQuestions');
