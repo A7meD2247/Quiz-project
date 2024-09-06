@@ -270,6 +270,13 @@ class Exam {
             if (this.timeLeft < 0) {
                 // Stop the timer
                 clearInterval(this.timerInterval);
+                localStorage.setItem('examTimeUp', 'true');
+                this.score = this.answersGiven.reduce((acc, answer, index) => {
+                    const correctAnswer = this.questions[index].correctAnswer;
+                    return acc + (answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase() ? 1 : 0);
+                }, 0);
+                localStorage.setItem('examScore', this.score);
+
                 // Redirect to the "End.html" page when the time is up
                 window.location.href = "End.html";
             }
@@ -289,13 +296,8 @@ class Exam {
         const scoreElement = document.getElementById('Score');
         const flagButton = document.getElementById('Flag');
 
-        if (flagButton) {
-            flagButton.addEventListener('click', () => {
-                const questionIndex = this.currentQuestionIndex; // Assuming you want to flag the current question
-                this.flagQuestion(questionIndex);
-            });
-        }
         // Display the user's score (if applicable) from localStorage
+        
         if (scoreElement) {
             const score = localStorage.getItem('examScore') || 0;
             scoreElement.textContent = `${score}/10`;
@@ -429,15 +431,13 @@ class Exam {
         }, 0);
         // Store the user's score in localStorage
         localStorage.setItem('examScore', this.score);
+        localStorage.setItem('examSubmitted', 'true');
 
         // Check if all questions have been answered
         const allAnswered = this.answersGiven.length === this.questions.length && !this.answersGiven.includes(undefined);
 
         // If all questions are answered
         if (allAnswered) {
-            const overlay = document.getElementById('overlay');
-            overlay.style.display = 'block';
-            overlay.innerHTML = 'Please wait...';
             // Redirect to the success page if the score is greater than 5
             // Redirect to the failure page if the score is 5 or less
             if (this.score > 5) {
@@ -472,7 +472,7 @@ window.onload = function() {
     // Check if the 'Time' element exists on the page
     if (document.getElementById('Time')) {
         // If the 'Time' element is present, create a new Exam instance with 5 minutes
-        new Exam(5);
+        new Exam(1);
     }
 
     // Get the 'Submit' button element from the DOM
@@ -492,4 +492,124 @@ window.onload = function() {
         const score = localStorage.getItem('examScore') || 0;
         scoreElement.textContent = `${score}/10`;
     }
-};
+    const examSubmitted = localStorage.getItem('examSubmitted');
+    const examScore = localStorage.getItem('examScore');
+
+    if (examSubmitted === 'true' && window.location.pathname.includes("Exam.html")) {
+        // Redirect based on the stored score
+        if (examScore > 5) {
+            window.location.href = "../htmlRoutes/success.html";
+        } else {
+            window.location.href = "../htmlRoutes/failed.html";
+        }
+    }
+    const examTimeUp = localStorage.getItem('examTimeUp');
+    if (examTimeUp === 'true' && window.location.pathname.includes("Exam.html")) {
+        window.location.href = "End.html";
+    }
+        const wrapper = document.querySelector('.wrapper');
+        const loginLink = document.querySelector('.login-link');
+        const registerLink = document.querySelector('.register-link');
+        const btnPopup = document.querySelector('.btnlogin-popup');
+        const iconClose = document.querySelector('.icon-close');
+    
+        // Toggle between Login and Register
+        if (registerLink) {
+            registerLink.addEventListener('click', () => wrapper.classList.add('active'));
+        }
+    
+        if (loginLink) {
+            loginLink.addEventListener('click', () => wrapper.classList.remove('active'));
+        }
+    
+        if (btnPopup) {
+            btnPopup.addEventListener('click', () => wrapper.classList.add('active-popup'));
+        }
+    
+        if (iconClose) {
+            iconClose.addEventListener('click', () => wrapper.classList.remove('active-popup'));
+        }
+    
+        // Handle user signup
+        const signupForm = document.getElementById('signupForm');
+        if (signupForm) {
+            signupForm.addEventListener('submit', handleSignup);
+        }
+    
+        // Handle user login
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', handleLogin);
+        }
+    
+        // Check if user is already logged in and block access to signup page
+        checkLoginStatus();
+    
+        function handleSignup(event) {
+            event.preventDefault();
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+        
+            if (username && email && password) {
+                // Save user data to localStorage
+                const userData = { username, email, password };
+                localStorage.setItem('userData', JSON.stringify(userData));
+                
+                // Create or update the success message element
+                let successMessage = document.getElementById('success-message');
+                if (!successMessage) {
+                    successMessage = document.createElement('p');
+                    successMessage.id = 'success-message';
+                    successMessage.style.color = 'green'; // Set the text color to green
+                    successMessage.style.marginTop = '10px'; // Optional: add margin for spacing
+                    document.querySelector('.form-box.register').appendChild(successMessage);
+                }
+                
+                // Set the success message text
+                successMessage.textContent = 'Registration successful! You can now login.';
+        
+                // Optional: Switch back to the login form after a delay
+                setTimeout(() => {
+                    wrapper.classList.remove('active');  // Switch back to login form
+                    successMessage.textContent = ''; // Clear the success message after switching
+                }, 2000); // Adjust delay as needed
+            } else {
+                alert('Please fill in all the fields');
+            }
+        }
+    
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+    
+            const savedUserData = JSON.parse(localStorage.getItem('userData'));
+    
+            if (savedUserData && email === savedUserData.email && password === savedUserData.password) {
+                // Mark user as logged in
+                localStorage.setItem('isLoggedIn', 'true');
+    
+                // Redirect to 'meow.html' if login is successful
+                window.location.href = '../htmlRoutes/ExamHome.html';
+            } else {
+                let errorMessage = document.getElementById('error-message');
+                if (!errorMessage) {
+                    errorMessage = document.createElement('p');
+                    errorMessage.id = 'error-message';
+                    errorMessage.style.color = 'red'; // Set the text color to red
+                    document.querySelector('.form-box.login').appendChild(errorMessage);
+                    errorMessage.textContent = 'Invalid email or password. Please try again or register if you don\'t have an account.';
+                }
+            }
+        }
+    
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+        
+            // If the user is logged in and trying to access the signup page
+            if (isLoggedIn === 'true' && window.location.pathname.includes("Signup.html")) {
+            window.location.href = '../htmlRoutes/ExamHome.html'
+            }
+        }
+}
