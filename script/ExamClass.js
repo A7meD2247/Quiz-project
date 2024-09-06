@@ -31,7 +31,6 @@ class Exam {
         }
 
         this.setupEventListeners(); // Set up event listeners for user interactions
-    
     }
 
     flagQuestion(questionIndex) {
@@ -45,9 +44,6 @@ class Exam {
         }
         // Update the list of flagged questions displayed to the user
         this.updateFlaggedQuestionsList();
-
-        // Update any indicators that show how many questions are flagged
-        this.updateQuestionIndicator();
     }
 
     displayFlaggedQuestions() {
@@ -55,9 +51,6 @@ class Exam {
         const flaggedQuestionsContainer = document.getElementById('flaggedQuestions');
         // Check if the container exists
         if (flaggedQuestionsContainer) {
-
-            // Clear any previous flagged questions displayed in the container
-            flaggedQuestionsContainer.innerHTML = '';
             // Create an unordered list for better structure of flagged questions
             const ul = document.createElement('ul');
             // Iterate over each flagged question index
@@ -71,11 +64,7 @@ class Exam {
                     // Call the method to navigate
                     this.navigateToQuestion(questionIndex);
                 });
-                // Append the list item to the unordered list
-                ul.appendChild(listItem);
             });
-            // Append the unordered list to the flagged questions container
-            flaggedQuestionsContainer.appendChild(ul);
         } else {
             // Log an error if the flagged questions container is not found
             console.error('Flagged questions container not found');
