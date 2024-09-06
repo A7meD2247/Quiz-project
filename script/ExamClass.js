@@ -97,7 +97,7 @@ class Exam {
         // Create a new unordered list for structuring the flagged questions
         this.flaggedQuestions.forEach(index => {
             const flagItem = document.createElement('li'); // Changed from 'div' to 'li'
-            flagItem.className = 'flag-item'; // Ensure this matches your CSS class
+            flagItem.className = 'Flag-item';
             flagItem.textContent = `Question ${index + 1}`;
             flagItem.addEventListener('click', () => this.navigateToQuestion(index));
             ul.appendChild(flagItem); // Append the item to the unordered list
@@ -347,6 +347,15 @@ class Exam {
         if (overlay) {
             overlay.addEventListener('click', () => this.toggleMessage(false));
         }
+        if (flagButton) {
+            flagButton.addEventListener('click', () => {
+                // Flag the current question
+                this.flagQuestion(this.currentQuestionIndex);
+                this.updateFlaggedQuestionsList();
+            });
+        } else {
+            console.error('Flag button not found');
+        }
     }
 
     updateSubmitButtonVisibility() {
@@ -381,6 +390,7 @@ class Exam {
 
         // Display the confirmation popup
         confirmationPopup.classList.remove('hidden');
+        console.log('Flagged questions:', Array.from(this.flaggedQuestions));
 
         // Handle the "Yes" button click - submit the exam
         confirmYes.addEventListener('click', () => {
@@ -472,7 +482,7 @@ window.onload = function() {
     // Check if the 'Time' element exists on the page
     if (document.getElementById('Time')) {
         // If the 'Time' element is present, create a new Exam instance with 5 minutes
-        new Exam(1);
+        new Exam(60);
     }
 
     // Get the 'Submit' button element from the DOM
