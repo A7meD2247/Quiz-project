@@ -97,7 +97,7 @@ class Exam {
             console.error("Error loading questions:", error);
         }
     }
-
+//  Start From Here
     display() {
         // Select the DOM element that will display the question
         const questionArea = document.querySelector('.big-square');
@@ -210,12 +210,6 @@ class Exam {
                 answerSelected = true;
             }
         });
-        // Check if the user is on the last question
-        const isLastQuestion = this.currentQuestionIndex === this.questions.length - 1;
-        if (isLastQuestion && answerSelected) {
-            // Update the visibility of the submit button if on the last question and an answer is selected
-            this.updateSubmitButtonVisibility();
-        }
     }
 
     startTimer() {
@@ -233,7 +227,6 @@ class Exam {
 
             if (this.timeLeft < 0) {
                 // Stop the timer
-                clearInterval(this.timerInterval);
                 localStorage.setItem('examTimeUp', 'true');
                 this.score = this.answersGiven.reduce((acc, answer, index) => {
                     const correctAnswer = this.questions[index].correctAnswer;
@@ -249,23 +242,13 @@ class Exam {
 
     setupEventListeners() {
         const smallSquares = document.querySelectorAll('.small-square');
-        const submitAnswer = document.getElementById('SubmitAnswer');
         const nextButton = document.getElementById('Next');
         const prevButton = document.getElementById('Prev');
         const Info = document.getElementById('Info');
         const closeMessage = document.getElementById('closeMessage');
         const overlay = document.getElementById('overlay');
-        const message = document.getElementById('message');
         const submitExam = document.getElementById('submitExam');
-        const scoreElement = document.getElementById('Score');
         const flagButton = document.getElementById('Flag');
-
-        // Display the user's score (if applicable) from localStorage
-        
-        if (scoreElement) {
-            const score = localStorage.getItem('examScore') || 0;
-            scoreElement.textContent = `${score}/10`;
-        }
 
         // Add click event listeners for each answer choice (small squares)
         if (smallSquares.length > 0) {
@@ -284,9 +267,6 @@ class Exam {
             });
         }
         // Add a click listener to the submit answer button
-        if (submitAnswer) {
-            submitAnswer.addEventListener('click', () => this.handleSubmission());
-        }
         // Add a click listener to the "Next" button to move to the next question
         if (nextButton) {
             nextButton.addEventListener('click', () => this.nextQuestion());
@@ -354,11 +334,9 @@ class Exam {
 
         // Display the confirmation popup
         confirmationPopup.classList.remove('hidden');
-        console.log('Flagged questions:', Array.from(this.flaggedQuestions));
 
         // Handle the "Yes" button click - submit the exam
         confirmYes.addEventListener('click', () => {
-            confirmationPopup.classList.add('hidden');  // Hide the popup
             this.finalizeSubmission(); // Call the final submission function
         });
 
@@ -368,20 +346,6 @@ class Exam {
         });
     }
 
-    handleSubmission() {
-        // Store the currently selected answer for the current question
-        this.storeAnswer();
-        // Check if all questions have been answered by comparing the number of answers given
-        // with the total number of questions, and ensuring none of the answers are undefined
-        const allAnswered = this.answersGiven.length === this.questions.length && !this.answersGiven.includes(undefined);
-        // If not all questions are answered, show Box that prompting the user to answer all questions
-        if (!allAnswered) {
-            this.showPopup();
-        } else {
-            // If all questions are answered, update the visibility of the submit button
-            this.updateSubmitButtonVisibility();
-        }
-    }
     showPopup() {
         const popup = document.getElementById('popup');
         const closePopup = document.getElementById('closePopup');
@@ -446,7 +410,7 @@ window.onload = function() {
     // Check if the 'Time' element exists on the page
     if (document.getElementById('Time')) {
         // If the 'Time' element is present, create a new Exam instance with 5 minutes
-        new Exam(60);
+        new Exam(5);
     }
 
     // Get the 'Submit' button element from the DOM
@@ -536,7 +500,7 @@ window.onload = function() {
                     successMessage = document.createElement('p');
                     successMessage.id = 'success-message';
                     successMessage.style.color = 'green'; // Set the text color to green
-                    successMessage.style.marginTop = '10px'; // Optional: add margin for spacing
+                    successMessage.style.marginTop = '10px';
                     document.querySelector('.form-box.register').appendChild(successMessage);
                 }
                 
@@ -577,7 +541,6 @@ window.onload = function() {
                 }
             }
         }
-    
         function checkLoginStatus() {
             const isLoggedIn = localStorage.getItem('isLoggedIn');
         
